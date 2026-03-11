@@ -58,14 +58,13 @@ export default function Login() {
     <Box
       sx={{
         minHeight: "100vh",
-        background:theme.colors.background.default,
+        background: theme.colors.background.default,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: "20px",
         position: "relative",
         overflow: "hidden",
-        
       }}
     >
       <Box
@@ -135,7 +134,7 @@ export default function Login() {
               }}
             >
               {isLogin
-                ? "Sign in to access your account and continue shopping beautiful wooden crafts with us."
+                ? "Sign in to access your account and continue shopping beautiful Store Names with us."
                 : "Create an account to explore our amazing collection and enjoy exclusive offers!"}
             </Typography>
             <Box
@@ -274,24 +273,24 @@ export default function Login() {
                 autoComplete="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              sx={{
-                mb: 2,
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "12px",
-                  transition: "all 0.3s ease",
-                  "&:hover fieldset": {
-                    borderColor: theme.colors.primary.main,
+                sx={{
+                  mb: 2,
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "12px",
+                    transition: "all 0.3s ease",
+                    "&:hover fieldset": {
+                      borderColor: theme.colors.primary.main,
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: theme.colors.primary.main,
+                      borderWidth: "2px",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    borderColor: theme.colors.primary.main,
-                    borderWidth: "2px",
+                  "& .MuiOutlinedInput-input": {
+                    fontSize: "16px",
+                    padding: "16px 16px",
                   },
-                },
-                "& .MuiOutlinedInput-input": {
-                  fontSize: "16px",
-                  padding: "16px 16px",
-                },
-              }}
+                }}
                 variant="outlined"
               />
             )}

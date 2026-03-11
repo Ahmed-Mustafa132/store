@@ -1,6 +1,6 @@
 import { getTheme } from "../../../Theme/Theme";
 import { useNavigate } from "react-router-dom";
-import Image from "../../../assets/Images/AboutmeImg.jpg";
+import Image from "../../../assets/Images/Image.jpg";
 import { useThemeContext } from "../../../Context/ThemeContext";
 
 import {
@@ -64,7 +64,7 @@ export default function About() {
                   color: theme.colors.text.secondary,
                 }}
               >
-                At WoodCraft, we transform raw wood into masterpieces. Our
+                At Store Name, we transform raw wood into masterpieces. Our
                 passion for woodworking drives us to create furniture that
                 combines traditional craftsmanship with modern design.
               </Typography>

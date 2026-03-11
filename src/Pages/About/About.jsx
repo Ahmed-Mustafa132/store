@@ -18,7 +18,7 @@ import { useThemeContext } from "../../Context/ThemeContext";
 export default function Aboutme() {
   const { isDarkMode } = useThemeContext();
   const theme = getTheme(isDarkMode);
-  
+
   return (
     <Box sx={{ bgcolor: theme.colors.background.default, py: 8 }}>
       <Container maxWidth="lg">
@@ -31,7 +31,7 @@ export default function Aboutme() {
               gutterBottom
               sx={{ color: theme.colors.text.primary }}
             >
-              About Wooden Craft
+              About Store Name
             </Typography>
             <Typography
               variant="h5"
@@ -46,17 +46,29 @@ export default function Aboutme() {
           <Grid item xs={12} md={6}>
             <Card elevation={3} sx={{ bgcolor: theme.colors.background.paper }}>
               <CardContent>
-                <Typography variant="h4" gutterBottom sx={{ color: theme.colors.text.primary }}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  sx={{ color: theme.colors.text.primary }}
+                >
                   Our Story
                 </Typography>
-                <Typography variant="body1" paragraph sx={{ color: theme.colors.text.secondary }}>
-                  At Wooden Craft, we believe in the timeless beauty of
+                <Typography
+                  variant="body1"
+                  paragraph
+                  sx={{ color: theme.colors.text.secondary }}
+                >
+                  At Store Name, we believe in the timeless beauty of
                   handcrafted wooden furniture. Our journey began with a simple
                   passion for woodworking and has evolved into a commitment to
                   creating exceptional pieces that bring warmth and character to
                   your home.
                 </Typography>
-                <Typography variant="body1" paragraph sx={{ color: theme.colors.text.secondary }}>
+                <Typography
+                  variant="body1"
+                  paragraph
+                  sx={{ color: theme.colors.text.secondary }}
+                >
                   Each piece we create tells a unique story, combining
                   traditional craftsmanship with contemporary design. Our
                   dedicated team of artisans puts their heart and soul into
@@ -71,7 +83,11 @@ export default function Aboutme() {
           <Grid item xs={12} md={6}>
             <Card elevation={3} sx={{ bgcolor: theme.colors.background.paper }}>
               <CardContent>
-                <Typography variant="h4" gutterBottom sx={{ color: theme.colors.text.primary }}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  sx={{ color: theme.colors.text.primary }}
+                >
                   Contact Information
                 </Typography>
                 <Stack spacing={2}>
@@ -83,15 +99,21 @@ export default function Aboutme() {
                   </Box>
                   <Box display="flex" alignItems="center" gap={2}>
                     <PhoneIcon sx={{ color: theme.colors.primary.main }} />
-                    <Typography sx={{ color: theme.colors.text.secondary }}>(555) 123-4567</Typography>
+                    <Typography sx={{ color: theme.colors.text.secondary }}>
+                      (555) 123-4567
+                    </Typography>
                   </Box>
                   <Box display="flex" alignItems="center" gap={2}>
                     <EmailIcon sx={{ color: theme.colors.primary.main }} />
-                    <Typography sx={{ color: theme.colors.text.secondary }}>info@woodencraft.com</Typography>
+                    <Typography sx={{ color: theme.colors.text.secondary }}>
+                      info@woodencraft.com
+                    </Typography>
                   </Box>
                   <Box display="flex" alignItems="center" gap={2}>
                     <WorkIcon sx={{ color: theme.colors.primary.main }} />
-                    <Typography sx={{ color: theme.colors.text.secondary }}>Mon - Fri: 9:00 AM - 6:00 PM</Typography>
+                    <Typography sx={{ color: theme.colors.text.secondary }}>
+                      Mon - Fri: 9:00 AM - 6:00 PM
+                    </Typography>
                   </Box>
                 </Stack>
               </CardContent>
@@ -100,9 +122,17 @@ export default function Aboutme() {
 
           {/* Values Section */}
           <Grid item xs={12}>
-            <Card elevation={3} sx={{ mt: 4, bgcolor: theme.colors.background.paper }}>
+            <Card
+              elevation={3}
+              sx={{ mt: 4, bgcolor: theme.colors.background.paper }}
+            >
               <CardContent>
-                <Typography variant="h4" gutterBottom align="center" sx={{ color: theme.colors.text.primary }}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  align="center"
+                  sx={{ color: theme.colors.text.primary }}
+                >
                   Our Values
                 </Typography>
                 <Grid container spacing={3} sx={{ mt: 2 }}>
@@ -125,7 +155,11 @@ export default function Aboutme() {
                         >
                           {value.charAt(0)}
                         </Avatar>
-                        <Typography variant="h6" gutterBottom sx={{ color: theme.colors.text.primary }}>
+                        <Typography
+                          variant="h6"
+                          gutterBottom
+                          sx={{ color: theme.colors.text.primary }}
+                        >
                           {value}
                         </Typography>
                       </Box>

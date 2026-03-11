@@ -307,6 +307,30 @@ const OrdersDashboard = () => {
                 variant="subtitle1"
                 sx={{ color: theme.colors.text.secondary }}
               >
+               address :{productsDialog.order?.address}
+              </Typography>
+       <Typography
+                variant="subtitle1"
+                sx={{ color: theme.colors.text.secondary }}
+              >
+                city: {productsDialog.order?.city}
+              </Typography>
+                    <Typography
+                variant="subtitle1"
+                sx={{ color: theme.colors.text.secondary }}
+              >
+                postalCode: {productsDialog.order?.postalCode}
+              </Typography>
+                    <Typography
+                variant="subtitle1"
+                sx={{ color: theme.colors.text.secondary }}
+              >
+                phone: {productsDialog.order?.phone}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{ color: theme.colors.text.secondary }}
+              >
                 Order Total: ${productsDialog.order?.totalPrice}
               </Typography>
               <Typography

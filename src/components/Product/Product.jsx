@@ -61,7 +61,7 @@ export default function Product({ product }) {
               {product.title}
             </Typography>
             <Chip
-              label={product.category}
+              label={product.category?.name || "Uncategorized"}
               size="small"
               sx={{
                 bgcolor: theme.colors.primary.light,
@@ -98,7 +98,7 @@ export default function Product({ product }) {
             <Typography
               variant="h6"
               sx={{
-                color: theme.colors.text.primary    ,
+                color: theme.colors.text.primary,
                 fontWeight: "bold",
               }}
             >

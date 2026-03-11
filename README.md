@@ -1,6 +1,6 @@
 # Wooden Furniture Frontend
 
-This is the frontend application for the Wooden Craft e-commerce platform. Built with React and Vite, it provides a modern, responsive interface for customers to browse and purchase handcrafted wooden furniture.
+This is the frontend application for the Store Name  namee-commerce platform. Built with React and Vite, it provides a modern, responsive interface for customers to browse and purchase handcrafted wooden furniture.
 
 ## Features
 
@@ -30,12 +30,14 @@ This is the frontend application for the Wooden Craft e-commerce platform. Built
 ### Installation
 
 1. Clone the repository
+
    ```bash
    git clone <repository-url>
    cd wooden-fueniture-frontend
    ```
 
 2. Install dependencies
+
    ```bash
    npm install
    # or
@@ -43,6 +45,7 @@ This is the frontend application for the Wooden Craft e-commerce platform. Built
    ```
 
 3. Start the development server
+
    ```bash
    npm run dev
    # or
@@ -87,4 +90,4 @@ src/
 
 ---
 
-**Enjoy
+\*\*Enjoy

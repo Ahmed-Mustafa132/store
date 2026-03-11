@@ -273,7 +273,7 @@ export default function DashboardProducts() {
                     {product.title}
                   </TableCell>
                   <TableCell sx={{ color: theme.colors.text.primary }}>
-                    {product.category}
+                    {product.category?.name || "Uncategorized"}
                   </TableCell>
                   <TableCell sx={{ color: theme.colors.text.primary }}>
                     ${product.price}
@@ -381,34 +381,6 @@ export default function DashboardProducts() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  select
-                  label="Category"
-                  name="category"
-                  value={currentProduct.category}
-                  onChange={handleInputChange}
-                  required
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: theme.colors.text.primary,
-                      "& fieldset": {
-                        borderColor: theme.colors.border,
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: theme.colors.text.secondary,
-                    },
-                  }}
-                >
-                  <MenuItem value="furniture">Furniture</MenuItem>
-                  <MenuItem value="decor">Decor</MenuItem>
-                  <MenuItem value="kitchen">Kitchen</MenuItem>
-                  <MenuItem value="outdoor">Outdoor</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </TextField>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
                   label="Price"
                   name="price"
                   type="number"
@@ -512,90 +484,6 @@ export default function DashboardProducts() {
                   required
                   multiline
                   rows={4}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: theme.colors.text.primary,
-                      "& fieldset": {
-                        borderColor: theme.colors.border,
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: theme.colors.text.secondary,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Material"
-                  name="material"
-                  value={currentProduct.material}
-                  onChange={handleInputChange}
-                  required
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: theme.colors.text.primary,
-                      "& fieldset": {
-                        borderColor: theme.colors.border,
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: theme.colors.text.secondary,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Dimensions"
-                  name="dimensions"
-                  value={currentProduct.dimensions}
-                  onChange={handleInputChange}
-                  required
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: theme.colors.text.primary,
-                      "& fieldset": {
-                        borderColor: theme.colors.border,
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: theme.colors.text.secondary,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Weight"
-                  name="weight"
-                  value={currentProduct.weight}
-                  onChange={handleInputChange}
-                  required
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: theme.colors.text.primary,
-                      "& fieldset": {
-                        borderColor: theme.colors.border,
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: theme.colors.text.secondary,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Finish"
-                  name="finish"
-                  value={currentProduct.finish}
-                  onChange={handleInputChange}
-                  required
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       color: theme.colors.text.primary,

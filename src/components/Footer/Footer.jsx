@@ -42,7 +42,7 @@ export default function Footer() {
                   textShadow: `2px 2px 4px ${theme.colors.shadow}`,
                 }}
               >
-                WoodCraft
+                store name
               </Typography>
               <Typography variant="h6" sx={{ mb: 3, fontWeight: 300 }}>
                 Crafting Excellence Since 2010
@@ -85,7 +85,7 @@ export default function Footer() {
                 </Typography>
 
                 <Box>
-                  <Typography>info@woodcraft.com</Typography>
+                  <Typography>info@Store Name.com</Typography>
                   <Typography>(123) 456-7890</Typography>
                 </Box>
 
@@ -140,7 +140,8 @@ export default function Footer() {
 
           <Box sx={{ textAlign: "center" }}>
             <Typography sx={{ mb: 1 }}>
-              © {new Date().getFullYear()} WoodCraft. All Rights Reserved.
+              © {new Date().getFullYear()} Store Name  . All Rights
+              Reserved.
             </Typography>
             <Typography variant="caption" sx={{ opacity: 0.8 }}>
               All content and designs presented on this website are protected

@@ -91,7 +91,7 @@ export default function ProductDetails() {
           <Grid item xs={12} md={6}>
             <Box>
               <Chip
-                label={product.category}
+                label={product.category?.name || "Uncategorized"}
                 sx={{
                   bgcolor: theme.colors.primary.light,
                   color: "white",
@@ -176,38 +176,6 @@ export default function ProductDetails() {
                   <Typography>2 Year Warranty</Typography>
                 </Box>
               </Stack>
-
-              {/* Specifications */}
-              <Box sx={{ mt: 4 }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: "bold",
-                    mb: 2,
-                    color: theme.colors.text.primary,
-                  }}
-                >
-                  Specifications
-                </Typography>
-                <Grid container spacing={2}>
-                  {[
-                    { label: "Material", value: product.material },
-                    { label: "Dimensions", value: product.dimensions },
-                    { label: "Weight", value: product.weight },
-                    { label: "Finish", value: product.finish },
-                  ].map((spec, index) => (
-                    <Grid item xs={6} key={index}>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: theme.colors.text.secondary }}
-                      >
-                        {spec.label}:
-                      </Typography>
-                      <Typography variant="body1">{spec.value}</Typography>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
             </Box>
           </Grid>
         </Grid>

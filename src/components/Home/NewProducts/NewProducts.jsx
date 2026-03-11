@@ -15,7 +15,12 @@ export default function NewProducts() {
     axiosInstance
       .get("/products")
       .then((res) => {
-        setProducts(res.data.products);
+        // Map the populated category object to its name string to prevent React rendering errors
+        const mappedProducts = res.data.products.map((product) => ({
+          ...product,
+          category: product.category?.name || "Uncategorized",
+        }));
+        setProducts(mappedProducts);
         setLoading(false);
       })
       .catch((error) => {

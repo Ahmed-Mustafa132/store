@@ -33,10 +33,7 @@ const CartDrawer = () => {
 
   return (
     <>
-      <IconButton
-        onClick={() => setIsOpen(true)}
-        sx={{ color: "#fff", bgcolor: theme.colors.background.paper }}
-      >
+      <IconButton onClick={() => setIsOpen(true)} sx={{ color: "#fff" }}>
         <Badge badgeContent={cartItems.length} color="error">
           <ShoppingCartIcon />
         </Badge>

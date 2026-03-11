@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -8,6 +8,10 @@ import {
   MenuItem,
   Paper,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axiosInstance from "../../axiosConfig/axiosConfig";
@@ -27,21 +31,26 @@ const CreateProduct = () => {
     image: "",
     imageFile: null,
     stockQuantity: "",
-    material: "",
-    dimensions: "",
-    weight: "",
-    finish: "",
     warranty: "",
     delivery: "",
   });
 
-  const categories = [
-    { value: "furniture", label: "Furniture" },
-    { value: "decor", label: "Decor" },
-    { value: "kitchen", label: "Kitchen" },
-    { value: "outdoor", label: "Outdoor" },
-    { value: "other", label: "Other" },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [openCategoryDialog, setOpenCategoryDialog] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+
+  // Fetch categories from backend on component mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axiosInstance.get("/categories");
+        setCategories(response.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -63,10 +72,6 @@ const CreateProduct = () => {
     formDataToSend.append("price", formData.price);
     formDataToSend.append("category", formData.category);
     formDataToSend.append("stockQuantity", formData.stockQuantity);
-    formDataToSend.append("material", formData.material);
-    formDataToSend.append("dimensions", formData.dimensions);
-    formDataToSend.append("weight", formData.weight);
-    formDataToSend.append("finish", formData.finish);
     formDataToSend.append("warranty", formData.warranty);
     formDataToSend.append("delivery", formData.delivery);
 
@@ -87,10 +92,6 @@ const CreateProduct = () => {
           image: "",
           imageFile: null,
           stockQuantity: "",
-          material: "",
-          dimensions: "",
-          weight: "",
-          finish: "",
           warranty: "",
           delivery: "",
         });
@@ -102,6 +103,24 @@ const CreateProduct = () => {
         error.message ||
         "Error creating product";
       alert("Failed to create product: " + errorMessage);
+    }
+  };
+
+  // Handle creating a new category
+  const handleCreateCategory = async () => {
+    if (!newCategoryName.trim()) return;
+
+    try {
+      const response = await axiosInstance.post("/categories", {
+        name: newCategoryName,
+      });
+      // Add the new category to the list and select it
+      setCategories([...categories, response.data.category]);
+      setOpenCategoryDialog(false);
+      setNewCategoryName("");
+      alert("Category created successfully!");
+    } catch (error) {
+      alert(error.response?.data?.message || "Error creating category");
     }
   };
 
@@ -154,22 +173,31 @@ const CreateProduct = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                required
-                select
-                label="Category"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                variant="outlined"
-              >
-                {categories.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+              <Box sx={{ display: "flex", gap: 1, alignItems: "flex-start" }}>
+                <TextField
+                  fullWidth
+                  required
+                  select
+                  label="Category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                >
+                  {categories.map((option) => (
+                    <MenuItem key={option._id} value={option._id}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <Button
+                  variant="outlined"
+                  sx={{ height: "56px", minWidth: "100px" }}
+                  onClick={() => setOpenCategoryDialog(true)}
+                >
+                  Add New
+                </Button>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -184,51 +212,7 @@ const CreateProduct = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Dimensions"
-                name="dimensions"
-                value={formData.dimensions}
-                onChange={handleInputChange}
-                variant="outlined"
-                placeholder="Length x Width x Height"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Material"
-                name="material"
-                value={formData.material}
-                onChange={handleInputChange}
-                variant="outlined"
-                placeholder="material used"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                type="number"
-                label="Weight"
-                name="weight"
-                value={formData.weight}
-                onChange={handleInputChange}
-                variant="outlined"
-                placeholder="Weight in kg"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Finish"
-                name="finish"
-                value={formData.finish}
-                onChange={handleInputChange}
-                variant="outlined"
-                placeholder="Material finish/color"
-              />
-            </Grid>
+
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
@@ -305,6 +289,32 @@ const CreateProduct = () => {
           </Grid>
         </Box>
       </StyledPaper>
+
+      {/* Dialog for creating new category */}
+      <Dialog
+        open={openCategoryDialog}
+        onClose={() => setOpenCategoryDialog(false)}
+      >
+        <DialogTitle>Add New Category</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Category Name"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={newCategoryName}
+            onChange={(e) => setNewCategoryName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenCategoryDialog(false)}>Cancel</Button>
+          <Button onClick={handleCreateCategory} variant="contained">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
