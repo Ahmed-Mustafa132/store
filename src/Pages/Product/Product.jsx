@@ -179,42 +179,45 @@ export default function ProductDetails() {
             </Box>
           </Grid>
         </Grid>
-      </Container>
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="h6"
-          sx={{ mb: 2, color: theme.colors.text.primary }}
-        >
-          Rate this Product
-        </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <MUIRating
-            value={userRating}
-            precision={0.5}
-            onChange={(event, newValue) => {
-              handleRatingSubmit(newValue);
-            }}
-            onChangeActive={(event, newHover) => {
-              setHover(newHover);
-            }}
-            emptyIcon={
-              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-            }
-            sx={{
-              fontSize: "2rem",
-              color: theme.colors.primary.main,
-            }}
-          />
+
+        <Divider sx={{ my: 6 }} />
+
+        <Box sx={{ mb: 4 }}>
           <Typography
-            variant="body1"
-            sx={{ color: theme.colors.text.secondary }}
+            variant="h5"
+            sx={{ mb: 3, fontWeight: "bold", color: theme.colors.text.primary }}
           >
-            {userRating > 0
-              ? `Your rating: ${userRating}/5`
-              : "Rate this product"}
+            Rate this Product
           </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <MUIRating
+              value={userRating}
+              precision={0.5}
+              onChange={(event, newValue) => {
+                if (newValue !== null) handleRatingSubmit(newValue);
+              }}
+              onChangeActive={(event, newHover) => {
+                setHover(newHover);
+              }}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+              sx={{
+                fontSize: "3rem",
+                color: theme.colors.primary.main,
+              }}
+            />
+            <Typography
+              variant="h6"
+              sx={{ color: theme.colors.text.secondary }}
+            >
+              {userRating > 0
+                ? `Your rating: ${userRating}/5`
+                : "Rate this product"}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 }

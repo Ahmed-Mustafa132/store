@@ -84,7 +84,7 @@ export default function Product({ product }) {
               variant="body2"
               sx={{ ml: 1, color: theme.colors.text.secondary }}
             >
-              (4.5)
+              {product.rating} / 5
             </Typography>
           </Box>
 
