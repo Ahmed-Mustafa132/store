@@ -25,9 +25,6 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  List,
-  ListItem,
-  ListItemText,
   Divider,
 } from "@mui/material";
 import {
@@ -39,6 +36,8 @@ import {
   Search as SearchIcon,
   Visibility,
 } from "@mui/icons-material";
+import CircularIndeterminate from "../../components/Loading/Loading";
+
 import axiosInstance from "../../axiosConfig/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "../../Context/ThemeContext";
@@ -58,6 +57,7 @@ const OrdersDashboard = () => {
     order: null,
   });
   const [newStatus, setNewStatus] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!localStorage.getItem("userData")) {
@@ -71,6 +71,7 @@ const OrdersDashboard = () => {
     axiosInstance.get("/orders").then((response) => {
       setOrders(response.data.data.orders || []);
       setTotalRevenue(response.data.data.totalRevenue || 0);
+      setLoading(false);
     });
   };
 
@@ -152,7 +153,9 @@ const OrdersDashboard = () => {
       </CardContent>
     </Card>
   );
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   return (
     <Container maxWidth="xl">
       <Box

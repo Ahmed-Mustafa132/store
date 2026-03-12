@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardActions,
-  Stack,
 } from "@mui/material";
 import {
   Add as AddIcon,
@@ -20,18 +19,21 @@ import { useNavigate } from "react-router-dom";
 import { getTheme } from "../../Theme/Theme";
 import { useThemeContext } from "../../Context/ThemeContext";
 import axiosInstance from "../../axiosConfig/axiosConfig";
+import CircularIndeterminate from "../../components/Loading/Loading";
 
 export default function Dashboard() {
   const { isDarkMode } = useThemeContext();
   const theme = getTheme(isDarkMode);
   const [data, setData] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axiosInstance
       .get("/orders/dashboard")
       .then((res) => {
         setData(res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching dashboard data:");
@@ -65,7 +67,9 @@ export default function Dashboard() {
       stats: `${data.users} users`,
     },
   ];
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4, direction: "rtl" }}>
       <Box

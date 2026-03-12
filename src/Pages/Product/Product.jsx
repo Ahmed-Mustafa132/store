@@ -20,7 +20,7 @@ import axiosInstance from "../../axiosConfig/axiosConfig";
 import { getTheme } from "../../Theme/Theme";
 import { useThemeContext } from "../../Context/ThemeContext";
 import { useCart } from "../../Context/CartContext";
-
+import CircularIndeterminate from "../../components/Loading/Loading";
 export default function ProductDetails() {
   const { isDarkMode } = useThemeContext();
   const theme = getTheme(isDarkMode);
@@ -29,11 +29,14 @@ export default function ProductDetails() {
   const [userRating, setUserRating] = useState(0);
   const [hover, setHover] = useState(-1);
   const { addToCart } = useCart();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     axiosInstance
       .get(`/products/${id}`)
       .then((response) => {
         setProduct(response.data.product);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching product:", error);
@@ -62,7 +65,9 @@ export default function ProductDetails() {
     };
     addToCart(cartItem);
   };
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   if (!product) return null;
 
   return (

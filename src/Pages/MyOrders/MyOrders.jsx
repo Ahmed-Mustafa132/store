@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Alert,
 } from "@mui/material";
+import CircularIndeterminate from "../../components/Loading/Loading";
 
 const MyOrders = () => {
   const { userData } = useAuth();
@@ -27,6 +28,7 @@ const MyOrders = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setOrders(res.data.orders || []);
+        setLoading(false);
       } catch (err) {
         setError("Failed to fetch orders");
       } finally {
@@ -36,7 +38,7 @@ const MyOrders = () => {
     if (userData?._id) fetchOrders();
   }, [userData]);
 
-  if (loading) return <CircularProgress sx={{ mt: 4 }} />;
+  if (loading) return <CircularIndeterminate />;
   if (error) return <Alert severity="error">{error}</Alert>;
 
   return (

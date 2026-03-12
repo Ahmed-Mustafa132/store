@@ -19,7 +19,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  MenuItem,
   Grid,
   CircularProgress,
 } from "@mui/material";
@@ -34,7 +33,7 @@ import {
 import { getTheme } from "../../Theme/Theme";
 import { useThemeContext } from "../../Context/ThemeContext";
 import axiosInstance from "../../axiosConfig/axiosConfig";
-
+import CircularIndeterminate from "../../components/Loading/Loading";
 export default function DashboardProducts() {
   const { isDarkMode } = useThemeContext();
   const theme = getTheme(isDarkMode);
@@ -55,6 +54,7 @@ export default function DashboardProducts() {
     try {
       const response = await axiosInstance.get("/products");
       setProducts(response.data.products);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to fetch products:", err);
     }
@@ -160,7 +160,9 @@ export default function DashboardProducts() {
         .toLowerCase()
         .includes(searchTerm.toLowerCase()),
   );
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   return (
     <Container
       maxWidth="lg"

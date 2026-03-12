@@ -11,13 +11,14 @@ import {
   Select,
   FormControl,
   InputLabel,
-  Box
+  Box,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import axiosInstance from "../../axiosConfig/axiosConfig";
 import { getTheme } from "../../Theme/Theme";
 import { useThemeContext } from "../../Context/ThemeContext";
 import Product from "../../components/Product/Product";
+import CircularIndeterminate from "../../components/Loading/Loading";
 
 export default function Products() {
   const { isDarkMode } = useThemeContext();
@@ -27,6 +28,7 @@ export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch Categories
@@ -38,6 +40,7 @@ export default function Products() {
         if (Array.isArray(cats)) {
           setCategories(cats);
         }
+        setLoading(false);
       })
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);
@@ -53,7 +56,9 @@ export default function Products() {
       .then((response) => setProducts(response.data.products))
       .catch((error) => console.error("Error fetching products:", error));
   }, [searchTerm, selectedCategory, sortOrder]);
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   return (
     <Box sx={{ py: 8, minHeight: "50vh" }}>
       <Container>

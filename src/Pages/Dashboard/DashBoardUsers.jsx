@@ -25,6 +25,8 @@ import {
   InputLabel,
   Select,
 } from "@mui/material";
+import CircularIndeterminate from "../../components/Loading/Loading";
+
 import { getTheme } from "../../Theme/Theme";
 import {
   Edit as EditIcon,
@@ -54,8 +56,8 @@ export default function DashboardUsers() {
       const response = await axiosInstance
         .get("/users")
         .then((res) => {
-          console.log(res.data);
           setUsers(res.data);
+          setLoading(false);
         })
         .catch((err) => {
           console.error("Failed to fetch users:", err);
@@ -182,12 +184,15 @@ export default function DashboardUsers() {
   };
 
   // Filter users based on search term and role
-  const filteredUsers = users.filter((user) =>
-    (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
-    (roleFilter === "all" || user.role === roleFilter),
+  const filteredUsers = users.filter(
+    (user) =>
+      (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (roleFilter === "all" || user.role === roleFilter),
   );
-
+  if (loading) {
+    return <CircularIndeterminate />;
+  }
   return (
     <Container
       maxWidth="lg"
