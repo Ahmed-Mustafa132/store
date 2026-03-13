@@ -18,6 +18,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { getTheme } from "../../Theme/Theme";
 import { useThemeContext } from "../../Context/ThemeContext";
 import { useCart } from "../../Context/CartContext";
+import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 const CartDrawer = () => {
   const { isDarkMode } = useThemeContext();
@@ -25,6 +26,7 @@ const CartDrawer = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const { isLoggedIn } = useAuth();
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -33,7 +35,11 @@ const CartDrawer = () => {
 
   return (
     <>
-      <IconButton onClick={() => setIsOpen(true)} sx={{ color: "#fff" }} aria-label="shopping">
+      <IconButton
+        onClick={() => setIsOpen(true)}
+        sx={{ color: "#fff" }}
+        aria-label="shopping"
+      >
         <Badge badgeContent={cartItems.length} color="error">
           <ShoppingCartIcon />
         </Badge>
@@ -112,7 +118,14 @@ const CartDrawer = () => {
                   bgcolor: theme.colors.primary.dark,
                 },
               }}
-              onClick={() => navigate("/checkout")}
+              onClick={() => {
+                setIsOpen(false);
+                if (isLoggedIn) {
+                  navigate("/checkout");
+                } else {
+                  navigate("/login");
+                }
+              }}
             >
               Checkout
             </Button>
