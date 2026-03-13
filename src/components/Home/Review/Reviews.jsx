@@ -67,7 +67,7 @@ export default function Reviews() {
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                    <Avatar src={review.image} sx={{ mr: 2 }} />
+                    <Avatar src={review.image} sx={{ mr: 2 }} alt="aveter"/>
                     <Box>
                       <Typography
                         variant="h6"
